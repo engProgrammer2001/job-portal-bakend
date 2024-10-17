@@ -28,8 +28,7 @@ export const applyForJob = async (req, res) => {
   try {
     const userId = req.id;
     const jobId = req.params.id;
-    console.log("User ID:", userId);
-    console.log("Job ID:", jobId);
+    
     // Check if job ID is provided
     if (!jobId) {
       return res.status(400).json({ message: "Job Id is required" });
@@ -108,7 +107,6 @@ export const getAllApplications = async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
 export const getApplicants = async (req, res) => {
   try {
     const jobId = req.params.id;
@@ -132,7 +130,6 @@ export const getApplicants = async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
 export const updateApplicationStatus = async (req, res) => {
   try {
     const status = req.body.status;
@@ -172,9 +169,6 @@ export const getTotalApplications = async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
-
-
 export const getAllApplicationsByEmployer = async (req, res) => {
   try {
     const employerId = req.id; // Assuming this is the employer's user ID from the token

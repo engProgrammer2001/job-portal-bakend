@@ -28,7 +28,7 @@ app.use(cookieParser());
 
 // cors origin policy
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "https://skokka.org.in/",
   credentials: true,
 };
 app.use(cors(corsOptions));

@@ -19,7 +19,7 @@ router.post(
   applyForJob
 );
 router.get(
-  "/get-all-applications-of-login-employer",
+  "/get-all-applications",
   isAuthenticated,
   getAllApplications
 );
