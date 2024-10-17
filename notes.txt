@@ -1,0 +1,17 @@
+require packages : 
+-------------------
+1) express 
+2) mongoose
+3) nodemon
+4) jsonwebtoken
+5) bcryptjs
+6) cookie-parser
+7) dotenv
+8) cors
+9) 
+
+
+
+username : jobportal
+password : Jobportal2024
+
