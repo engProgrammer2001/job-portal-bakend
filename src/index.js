@@ -35,8 +35,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
-// Handling preflight OPTIONS request
 app.options('*', cors(corsOptions)); 
 
 const PORT = process.env.PORT || 5454;

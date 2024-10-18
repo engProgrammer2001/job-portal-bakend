@@ -153,11 +153,10 @@ export const updateApplicationStatus = async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
 // get total number of applications
 export const getTotalApplications = async (req, res) => {
   try {
-    const totalApplications = await Application.find();
+    const totalApplications = await Application.find().populate("job") ;
     return res
       .status(200)
       .json({

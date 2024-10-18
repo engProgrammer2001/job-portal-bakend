@@ -15,8 +15,8 @@ const storage = multer.diskStorage({
 
 // Initialize multer with the storage configuration
 const upload = multer({ storage: storage });
-
 // Controller function to add companies
+
 export const addCompanies = async (req, res) => {
   const {
     companyName,
@@ -29,11 +29,9 @@ export const addCompanies = async (req, res) => {
     companyDescription,
     companyContent,
   } = req.body;
-
   try {
     const companyLogo = req.file ? req.file.path : null;
     const createdBy = req.id;
-
     const newCompany = new Company({
       companyName,
       companyTagLine,
@@ -47,16 +45,12 @@ export const addCompanies = async (req, res) => {
       companyContent,
       createdBy,
     });
-
     await newCompany.save();
-
     const user = await User.findById(createdBy);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    // Push the new company ID into the user's companies array
     user.companies.push(newCompany._id);
-
     await user.save();
     return res
       .status(201)
@@ -126,7 +120,7 @@ export const updateCompaniesDetails = async (req, res) => {
 export const getAllCompanies = async (req, res) => {
   try {
     // Populate the 'createdBy' field with user details
-    const companies = await Company.find().populate("createdBy", "fullName");
+    const companies = await Company.find().populate("createdBy");
 
     return res.status(200).json(companies);
   } catch (error) {

@@ -39,8 +39,6 @@ export const postJob = async (req, res) => {
     // i want to populate company details from the company ID
     const companyDetails = await Company.findById(company);
 
-    console.log("companyDetails", companyDetails);
-
     return res.status(200).json({
       message: "Job posted successfully",
       newJob,
@@ -112,7 +110,6 @@ export const GetAllJobsWithSearch = async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
 export const getJobById = async (req, res) => {
   try {
     const JobId = req.params.id;
@@ -137,7 +134,7 @@ export const getJobById = async (req, res) => {
 export const GetadminJobs = async (req, res) => {
   try {
     const adminId = req.id;
-    const jobs = await Job.find({ created_by: adminId });
+    const jobs = await Job.find({ created_by: adminId }).populate("company");
     if (!jobs) {
       return res.status(404).json({ message: "Jobs not found" });
     }

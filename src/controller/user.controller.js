@@ -3,11 +3,15 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import GenerateToken from "../config/jwtProvider.js";
 
-// Register user controller
 export const register = async (req, res) => {
   const { fullName, number, email, password, role, about } = req.body;
 
   try {
+    // Ensure all required fields are present
+    if (!fullName || !number || !email || !password) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
     // Check if the user already exists by email
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -17,7 +21,8 @@ export const register = async (req, res) => {
     }
 
     // Hash the password before saving it
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const saltRounds = 10; // Use 10 rounds for salt
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
 
     // Create a new user instance
     const newUser = new User({
@@ -36,6 +41,7 @@ export const register = async (req, res) => {
     const payload = {
       id: savedUser._id,
     };
+
     // Generate JWT token
     const token = GenerateToken(payload);
 
@@ -47,7 +53,6 @@ export const register = async (req, res) => {
         fullName: savedUser.fullName,
         email: savedUser.email,
         number: savedUser.number,
-        password: savedUser.password,
         role: savedUser.role,
         avatar: savedUser.avatar,
         about: savedUser.about,
@@ -60,6 +65,7 @@ export const register = async (req, res) => {
     res.status(500).json({ message: "Server error. Please try again later." });
   }
 };
+
 
 export const login = async (req, res) => {
   try {
@@ -93,7 +99,6 @@ export const login = async (req, res) => {
         expiresIn: "7d",
       }
     );
-
     // Send the token and user details as a response
     res
       .status(200)
