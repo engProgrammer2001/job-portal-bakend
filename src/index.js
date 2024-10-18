@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 const corsOptions = {
-  //  origin: "https://skokka.org.in",
+  //  origin: "http://localhost:3000",
    origin: "https://skokka.org.in",
   credentials: true, 
 };
@@ -60,3 +60,4 @@ app.listen(PORT, () => {
   connectDB();
   console.log(`Server is running on port ${PORT}`);
 });
+
