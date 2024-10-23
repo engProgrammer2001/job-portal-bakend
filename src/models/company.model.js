@@ -12,6 +12,7 @@ const companySchema = new mongoose.Schema(
     },
     companyLogo: {
       type: String,
+      default: "https://i.pinimg.com/736x/15/0f/a8/150fa8800b0a0d5633abc1d1c4db3d87.jpg"
     },
     companyWebsite: {
       type: String,

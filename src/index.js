@@ -2,12 +2,13 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
-import connectDB from "./config/db.js";
+
 import userRoute from "./routes/user.route.js";
-import companyRoute from "./routes/company.route.js"; 
+import companyRoute from "./routes/company.route.js";
 import jobRoute from "./routes/job.route.js";
 import applicationRoute from "./routes/application.route.js";
 import resumeRoute from "./routes/addresume.route.js";
+import connectDB from "./config/db.js";
 
 dotenv.config({});
 
@@ -15,9 +16,9 @@ const app = express();
 
 // Base route
 app.get("/", (req, res) => {
-  return res.status(200).send({ 
-    message: "Welcome to our job portal API - Node.js", 
-    status: true 
+  return res.status(200).send({
+    message: "Welcome to our job portal API - Node.js",
+    status: true
   });
 });
 
@@ -28,15 +29,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-const corsOptions = {
-  //  origin: "http://localhost:3000",
-   origin: "https://skokka.org.in",
-  credentials: true, 
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
-  allowedHeaders: ['Content-Type', 'Authorization']
-};
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); 
+// const corsOptions = {
+//   origin: "https://job-front-end.vercel.app",
+//   //  origin: "https://skokka.org.in",
+//   credentials: true,
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//   allowedHeaders: ['Content-Type', 'Authorization']
+// };
+app.use(cors());
 
 const PORT = process.env.PORT || 5454;
 
@@ -59,4 +59,3 @@ app.listen(PORT, () => {
   connectDB();
   console.log(`Server is running on port ${PORT}`);
 });
-
