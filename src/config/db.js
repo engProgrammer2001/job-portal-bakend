@@ -10,8 +10,3 @@ const connectDB = async () => {
     }
 };
 export default connectDB;
-
-
-
-
-// const Database_Url = "mongodb+srv://jobportal:Jobportal2024@cluster0.6dde9.mongodb.net/";
